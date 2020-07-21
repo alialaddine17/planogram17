@@ -1,0 +1,53 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="active">
+    <nb-card-header>
+        Manage Categories
+    </nb-card-header>
+    <nb-card-body>
+
+        <div class="row">
+            <nb-card-body class="select-group text-right">
+                <button type="button" action="addd" title="Add Category" name='addrecord' class='btn btn-primary' (click)="addCategory()">Add Category</button>
+            </nb-card-body>
+        </div>
+        <div class="panel-table table-responsive">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                <thead>
+                    <tr>
+                        <th style='display:none'>ID</th>
+                        <th>Title English</th>
+                        <th>Title Urdu</th>
+                        <th>Category Image</th>
+                        <th>Sort Order</th>
+                        <th>Created At</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="objectLength == true">
+                    <tr *ngFor="let item of categories">
+                        <td style='display:none'>{{ item.id }}</td>
+                        <td>{{ item.title_en }}</td>
+                        <td>{{ item.title_ur }}</td>
+                        <td><img [src]="item.catImg" *ngIf="item.catImg != '-'" width="50"></td>
+                        <td>{{ item.catSortOrder }}</td>
+                        <td>{{ item.created_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+                        <td>
+                          <a title="Change Status" class="statusButton" (click)="onCategoryStatusChange(1,item.id)"><i class="fa fa-toggle-on fa-2x fa-rotate-180 statusInactive" *ngIf="item.status == 0"></i></a>
+
+                          <a title="Change Status" class="statusButton" (click)="onCategoryStatusChange(0,item.id)"><i class="fa fa-toggle-on fa-2x statusActive" *ngIf="item.status == 1"></i></a>
+                      </td>
+                      <td>
+                          <a title="Edit" class="editor_edit" (click)="editCategory(item)"><i class="fa fa-edit editIcon"></i></a>
+                          <a title="Delete" class="editor_remove" (click)="deleteCategory(item.id)"><i class="fa fa-trash editIcon"></i></a></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="objectLength == false">
+                  <tr>
+                      <td colspan="3" class="no-data-available">No data!</td>
+                  </tr>
+              <tbody>
+
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>

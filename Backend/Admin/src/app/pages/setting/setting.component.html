@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <nb-card size="large" class="panel-table table">
+            <nb-tabset (changeTab)="toggleLoadingAnimation()">
+                <nb-tab tabTitle="General Settings" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="large" nbSpinnerMessage="Loading..Please Wait" class="white-bg-card-block">
+                    <form (ngSubmit)="onSaveSettingForm(mySettingFormData)" #formCtrl="ngForm">
+                        <div *ngFor="let data of generalinfo">
+                            <div class="form-group">
+                                <label class="label"><p>{{data.label}}</p></label>
+                                <input type="{{data.field_type_value}}" nbInput fullWidth placeholder="{{data.label}}" [(ngModel)]="data.val" name={{data.name}} class="input-full-width size-medium shape-rectangle" *ngIf="data.field_type_value != 'textarea'" required>
+                            </div>
+                        </div>
+                        <button type="submit" nbButton status="success" title="Save" [disabled]="!formCtrl.form.valid">Save</button> &nbsp;
+                        <button type="button" nbButton status="danger" routerLink="/dashboard" title="Cancel">Cancel</button>
+                    </form>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card>
+    </div>
+</div>

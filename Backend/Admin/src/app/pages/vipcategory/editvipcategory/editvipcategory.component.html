@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <nb-card-header>Edit VIP Category</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+      <div class="col-lg-12">
+          <form (ngSubmit)="onEditVipCategory()" [formGroup]="editVipCategoryForm" #form="ngForm">
+              <input type="hidden" class="form-control" [(ngModel)]="vipCategoryData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+              <nb-tabset>
+                  <nb-tab tabTitle="English">
+                      <!--English Title Starts-->
+                      <div class='form-group'>
+                          <label>Title English<span class="error">*</span></label>
+                          <input type='text' name='title_en' class='form-control' formControlName='title_en' placeholder='Title English' [(ngModel)]="vipCategoryData.title_en">
+                          <div *ngIf='editVipCategoryForm.controls["title_en"].invalid && (editVipCategoryForm.controls["title_en"].dirty || editVipCategoryForm.controls["title_en"].touched)'>
+                              <div *ngIf='editVipCategoryForm.controls["title_en"].errors.required' class="error">English title is required.</div>
+                          </div>
+                      </div>
+                      <!--English Title Ends-->
+
+                      <!--Description English Starts-->
+                    <div class="form-group">
+                        <label>Description English<span class="error">*</span></label>
+                        <ckeditor [config]="ckeConfig" formControlName='description_en' [(ngModel)]="vipCategoryData.description_en"></ckeditor>
+                        <div *ngIf='editVipCategoryForm.controls["description_en"].invalid && (editVipCategoryForm.controls["description_en"].dirty || editVipCategoryForm.controls["description_en"].touched)'>
+                            <div *ngIf='editVipCategoryForm.controls["description_en"].errors.required' class="error">Description English is required.</div>
+                        </div>
+                    </div>
+                    <!--Description English Ends-->
+
+                  </nb-tab>
+
+                  <nb-tab tabTitle="Urdu">
+                      <!--Urdu Title Starts-->
+                      <div class='form-group'>
+                          <label>Title Urdu<span class="error">*</span></label>
+                          <input type='text' name='title_ur' class='form-control' formControlName='title_ur' placeholder='Title Urdu' [(ngModel)]="vipCategoryData.title_ur">
+                          <div *ngIf='editVipCategoryForm.controls["title_ur"].invalid && (editVipCategoryForm.controls["title_ur"].dirty || editVipCategoryForm.controls["title_ur"].touched)'>
+                              <div *ngIf='editVipCategoryForm.controls["title_ur"].errors.required' class="error">Urdu title is required.</div>
+                          </div>
+                      </div>
+                      <!--Urdu Title Ends-->
+
+                      <!--Description Urdu Starts-->
+                    <div class="form-group">
+                        <label>Description Urdu<span class="error">*</span></label>
+                        <ckeditor [config]="ckeConfig" formControlName='description_ur' [(ngModel)]="vipCategoryData.description_ur"></ckeditor>
+                        <div *ngIf='editVipCategoryForm.controls["description_ur"].invalid && (editVipCategoryForm.controls["description_ur"].dirty || editVipCategoryForm.controls["description_ur"].touched)'>
+                            <div *ngIf='editVipCategoryForm.controls["description_ur"].errors.required' class="error">Description Urdu is required.</div>
+                        </div>
+                    </div>
+                    <!--Description Urdu Ends-->
+
+                  </nb-tab>
+              </nb-tabset>
+
+              <div class='form-group'>
+                  <button type="submit" class="btn btn-success" title="Save" [disabled]="!form.valid">Save</button> &nbsp; &nbsp;
+                  <button nbButton status="danger" (click)="onCloseModel()">Cancel</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

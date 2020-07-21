@@ -1,0 +1,17 @@
+<div class="header-container">
+    <div class="logo-container">
+        <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+            <nb-icon icon="menu-2-outline"></nb-icon>
+        </a>
+        <div class="logo" (click)="navigateHome()"><img src="assets/images/redBull-logo.png" class="header-logo"></div>
+    </div>
+</div>
+
+<div class="header-container">
+    <nb-actions size="small">
+        <nb-action class="user-action" *nbIsGranted="['view', 'user']">
+            <nb-user [nbContextMenu]="userMenu" [name]="user?.first_name">
+            </nb-user>
+        </nb-action>
+    </nb-actions>
+</div>

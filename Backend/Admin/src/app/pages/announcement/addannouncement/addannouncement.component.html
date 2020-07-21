@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <nb-card-header>Add Announcement</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+      <div class="col-lg-12">
+          <form (ngSubmit)="onAddAnnouncement()" [formGroup]="addAnnouncementForm" #form="ngForm">
+
+              <nb-tabset>
+                  <nb-tab tabTitle="English">
+                      <!--Announcement English Title Starts-->
+                      <div class='form-group'>
+                          <label>Announcement Title English<span class="error">*</span></label>
+                          <input type='text' name='anouncementTitle_en' class='form-control' formControlName='anouncementTitle_en' placeholder='Announcement Title English'>
+                          <p *ngIf='anouncementTitle_en.invalid && anouncementTitle_en.touched' class="error">Announcement English title is required.</p>
+                      </div>
+                      <!--Announcement English Title Ends-->
+
+                      <!--Announcement Description English Starts-->
+                      <div class="form-group">
+                          <label>Description English<span class="error">*</span></label>
+                          <ckeditor [config]="ckeConfig" formControlName='description_en'></ckeditor>
+                          <p *ngIf='description_en.invalid && description_en.touched' class="error">Description English is required.</p>
+                      </div>
+                      <!--Announcement Description English Ends-->
+                  </nb-tab>
+
+                  <nb-tab tabTitle="Urdu">
+                      <!--Announcement Urdu Title Starts-->
+                      <div class='form-group'>
+                          <label>Announcement Title Urdu<span class="error">*</span></label>
+                          <input type='text' name='anouncementTitle_ur' class='form-control' formControlName='anouncementTitle_ur' placeholder='Announcement Title Urdu'>
+                          <p *ngIf='anouncementTitle_ur.invalid && anouncementTitle_ur.touched' class="error">Announcement Urdu title is required.</p>
+                      </div>
+                      <!--Announcement Urdu Title Ends-->
+
+                      <!--Announcement Description urdu Starts-->
+                      <div class="form-group">
+                          <label>Description Urdu<span class="error">*</span></label>
+                          <ckeditor [config]="ckeConfig" formControlName='description_ur'></ckeditor>
+                          <p *ngIf='description_ur.invalid && description_ur.touched' class="error">Description Urdu is required.</p>
+                      </div>
+                      <!--Announcement Description urdu Ends-->
+                  </nb-tab>
+              </nb-tabset>
+
+              <!--Announcement Image Div Starts-->
+              <div class='form-group'>
+                  <label>Announcement Image<span class="error">*</span></label>
+                  <input type='file' name='anouncementImg' class='form-control' placeholder='Upload File' (change)="uploadFile($event)">
+              </div>
+              <!--Announcement Image Div Ends-->
+
+
+              <!--PDF Div Starts-->
+              <div class='form-group'>
+                <label>PDF</label>
+                <input type='file' name='pdf' accept="application/pdf" class='form-control' placeholder='Upload File' (change)="uploadPdf($event)">
+              </div>
+              <!--PDF Div Ends-->
+
+
+               <!--PDF Link Starts-->
+               <div class='form-group'>
+                <label>PDF Link<span class="error">*</span></label>
+                <input type='text' name='anouncement_pdf_url' class='form-control' formControlName='anouncement_pdf_url' placeholder='PDF Link'>
+            </div>
+            <!--PDF Link Title Ends-->
+
+              <div class='form-group'>
+                  <button type="submit" class="btn btn-success" title="Save" [disabled]="!form.valid">Save</button> &nbsp; &nbsp;
+                  <button nbButton status="danger" (click)="onCloseModel()">Cancel</button>
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>

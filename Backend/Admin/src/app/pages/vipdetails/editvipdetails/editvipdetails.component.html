@@ -1,0 +1,95 @@
+<div class="modal-header">
+  <nb-card-header>Edit VIP Details</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+      <div class="col-lg-12">
+          <form (ngSubmit)="onEditVipDetails()" [formGroup]="editVipDetailsForm" #form="ngForm">
+              <input type="hidden" class="form-control" [(ngModel)]="vipDetailsData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+               <!--Vip Category Div Start-->
+            <div class='form-group'>
+                <label>Vip Category<span class="error">*</span></label>
+                <select class='form-control' name='vipId' formControlName='vipId' (change)="selectionChangedForVipCategory($event)" [(ngModel)]="vipDetailsData.vipId">
+                  <option value=''>Select Vip Category</option>
+                  <option *ngFor='let vipId of vipIdsData' [value]='vipId.id'>{{vipId.title_en}}</option>
+              </select>
+              <div>
+                <div *ngIf='editVipDetailsForm.controls["vipId"].invalid && (editVipDetailsForm.controls["vipId"].dirty || editVipDetailsForm.controls["vipId"].touched)'>
+                    <div *ngIf='editVipDetailsForm.controls["vipId"].errors.required' class="error">Parent Category is required.</div>
+                </div>
+              </div>
+            </div>
+            <!--Vip Category Div End-->
+                <nb-tabset>
+                  <nb-tab tabTitle="English">
+                    <!--English Sub Title Starts-->
+                    <div class='form-group'>
+                        <label>Sub Title English<span class="error">*</span></label>
+                        <input type='text' name='subTitle_en' class='form-control' formControlName='subTitle_en' placeholder='Sub Title English' [(ngModel)]="vipDetailsData.subTitle_en">
+                        <div *ngIf='editVipDetailsForm.controls["subTitle_en"].invalid && (editVipDetailsForm.controls["subTitle_en"].dirty || editVipDetailsForm.controls["subTitle_en"].touched)'>
+                            <div *ngIf='editVipDetailsForm.controls["subTitle_en"].errors.required' class="error">English subtitle is required.</div>
+                        </div>
+                    </div>
+                    <!--English Sub Title Ends-->
+
+                    <!--English Detail Title Starts-->
+                    <div class='form-group'>
+                        <label>Detail Title English</label>
+                        <input type='text' name='detailTitle_en' class='form-control' formControlName='detailTitle_en' placeholder='Detail Title English' [(ngModel)]="vipDetailsData.detailTitle_en">
+                    </div>
+                    <!--English Detail Title Ends-->
+
+                    <!--Description English Starts-->
+                    <div class="form-group">
+                        <label>Description English</label>
+                        <ckeditor [config]="ckeConfig" formControlName='description_en' [(ngModel)]="vipDetailsData.description_en"></ckeditor>
+                    </div>
+                    <!--Description English Ends-->
+                  </nb-tab>
+                  <nb-tab tabTitle="Urdu">
+                    <!--Urdu Sub Title Starts-->
+                    <div class='form-group'>
+                        <label>Sub Title Urdu<span class="error">*</span></label>
+                        <input type='text' name='subTitle_ur' class='form-control' formControlName='subTitle_ur' placeholder='Sub Title Urdu' [(ngModel)]="vipDetailsData.subTitle_ur">
+                        <div *ngIf='editVipDetailsForm.controls["subTitle_ur"].invalid && (editVipDetailsForm.controls["subTitle_ur"].dirty || editVipDetailsForm.controls["subTitle_ur"].touched)'>
+                            <div *ngIf='editVipDetailsForm.controls["subTitle_ur"].errors.required' class="error">Urdu subtitle is required</div>
+                        </div>
+                    </div>
+                    <!--Urdu Sub Title Ends-->
+
+                    <!--Urdu Detail Title Starts-->
+                    <div class='form-group'>
+                        <label>Detail Title Urdu</label>
+                        <input type='text' name='detailTitle_ur' class='form-control' formControlName='detailTitle_ur' placeholder='Detail Title Urdu' [(ngModel)]="vipDetailsData.detailTitle_ur">
+                    </div>
+                    <!--Urdu Detail Title Ends-->
+
+                    <!--Description Urdu Starts-->
+                    <div class="form-group">
+                        <label>Description Urdu</label>
+                        <ckeditor [config]="ckeConfig" formControlName='description_ur' [(ngModel)]="vipDetailsData.description_ur"></ckeditor>
+                    </div>
+                    <!--Description Urdu Ends-->
+                  </nb-tab>
+                </nb-tabset>
+
+              <!--Image Div Starts-->
+              <div class='form-group'>
+                  <label>VIP Image</label>
+                  <input type='file' name='vipImg' class='form-control' placeholder='Upload File' (change)="uploadFileForVipImage($event)">
+                  <img [src]="vipDetailsData.vipImg" width="150" *ngIf="vipDetailsData.vipImg != null">
+              </div>
+              <!--Image Div Ends-->
+
+              <div class='form-group'>
+                  <button type="submit" class="btn btn-success" title="Save" [disabled]="!form.valid">Save</button> &nbsp; &nbsp;
+                  <button nbButton status="danger" (click)="onCloseModel()">Cancel</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>

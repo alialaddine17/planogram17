@@ -1,0 +1,127 @@
+<div class="modal-header">
+  <nb-card-header>Edit Product</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+      <div class="col-lg-12">
+          <form (ngSubmit)="onEditProduct()" [formGroup]="editProductForm" #form="ngForm">
+
+                  <input type="hidden" class="form-control" [(ngModel)]="productsData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+
+                  <nb-tabset>
+                    <nb-tab tabTitle="English">
+                      <!--Title English Starts-->
+                      <div class='form-group'>
+                        <label>Title English<span class="error">*</span></label>
+                        <input type='text' name='title_en' class='form-control' formControlName='title_en' placeholder='Title' [(ngModel)]="productsData.title_en">
+                        <div *ngIf='editProductForm.controls["title_en"].invalid && (editProductForm.controls["title_en"].dirty || editProductForm.controls["title_en"].touched)'>
+                          <div *ngIf='editProductForm.controls["title_en"].errors.required' class="error">English Title is required.</div>
+                      </div>
+                    </div>
+                    <!--Title English Ends-->
+
+                    <!--Description English Starts-->
+                    <div class="form-group">
+                      <label>Description English</label>
+                      <input type='text' name='productDesc_en' class='form-control' formControlName='productDesc_en' placeholder='Description English' [(ngModel)]="productsData.productDesc_en">
+                  </div>
+                  <!--Description English Ends-->
+
+                    </nb-tab>
+
+                    <nb-tab tabTitle="Urdu">
+                      <!--Title Urdu Starts-->
+                      <div class='form-group'>
+                        <label>Title Urdu<span class="error">*</span></label>
+                        <input type='text' name='title_ur' class='form-control' formControlName='title_ur' placeholder='Title' [(ngModel)]="productsData.title_ur">
+                        <div *ngIf='editProductForm.controls["title_ur"].invalid && (editProductForm.controls["title_ur"].dirty || editProductForm.controls["title_ur"].touched)'>
+                          <div *ngIf='editProductForm.controls["title_ur"].errors.required' class="error">Urdu Title is required.</div>
+                      </div>
+                    </div>
+                    <!--Title Urdu Ends-->
+
+                    <!--Description Urdu Starts-->
+                    <div class="form-group">
+                      <label>Description Urdu</label>
+                      
+                      <input type='text' name='productDesc_ur' class='form-control' formControlName='productDesc_ur' placeholder='Description Urdu' [(ngModel)]="productsData.productDesc_ur">
+                  </div>
+                  <!--Description Urdu Ends-->
+
+                    </nb-tab>
+                  </nb-tabset>
+
+                  <!--Main Category Div Start-->
+                  <div class='form-group'>
+                    <label>Parent Category<span class="error">*</span></label>
+                    <select class='form-control' name='catId' formControlName='catId' (change)="selectionChangedForMainCategory($event)" [(ngModel)]="productsData.catId">
+                      <option value=''>Select Parent Category</option>
+                      <option *ngFor='let parentId of parentIds' [value]='parentId.id'>{{parentId.title_en}}</option>
+                  </select>
+                  <div *ngIf='editProductForm.controls["catId"].invalid && (editProductForm.controls["catId"].dirty || editProductForm.controls["catId"].touched)'>
+                    <div *ngIf='editProductForm.controls["catId"].errors.required' class="error">Parent Category is required.</div>
+                </div>
+                </div>
+                <!--Main Category Div End-->
+
+                <!--Parent Category Div Starts-->
+                <div class="form-group">
+                  <label>Sub Category<span class="error">*</span></label>
+                  <select class="form-control" (change)="selectionChangedForSubCategory($event)" formControlName="subCatId" [(ngModel)]="productsData.subCatId">
+                  <option value="">Please select Sub Category</option>
+                  <option *ngFor="let subcat of subCategory" [value]="subcat.id">{{subcat.title_en}}</option>
+                  </select>
+                  <div *ngIf='editProductForm.controls["subCatId"].invalid && (editProductForm.controls["subCatId"].dirty || editProductForm.controls["subCatId"].touched)'>
+                    <div *ngIf='editProductForm.controls["subCatId"].errors.required' class="error">Sub Category is required.</div>
+                </div>
+                </div>
+              <!--Parent Category Div Ends-->
+
+                <!--Product Image Div Starts-->
+                <div class='form-group'>
+                  <label>Product Image<span class="error">*</span></label>
+                  <input type='file' name='productImg' class='form-control' placeholder='Upload File' (change)="uploadFileForProductImage($event)">
+                  <img [src]="productsData.productImg" width="150" *ngIf="productsData.productImg != '-'">
+                </div>
+                <!--Product Image Div Ends-->
+
+                <!--TrafficImage Type Dropdown Start-->
+                <div class='form-group'>
+                  <label>Traffic Flow Type</label>
+                  <select class='form-control' name='trafficFlow' formControlName='trafficFlow' (change)="onChange($event)" [(ngModel)]="productsData.trafficFlow">
+                      <option value=''>Select Type</option>
+                      <option *ngFor='let mytype of types' [value]='mytype.type'>{{mytype.name}}</option>
+                  </select>
+              </div>
+              <!--TrafficImage Type DropDown End-->
+
+
+               <!--Label Image Div Starts-->
+               <div class='form-group'>
+                <label>Label Image</label>
+                <input #lblImg type='file' name='label' class='form-control' placeholder='Upload File' (change)="uploadFileForLabelImage($event)">
+                <img [src]="productsData.label" width="150" *ngIf="productsData.label != '-'">
+                <a style="margin-top:10px;" href="javascript:void(0)" (click)="removeSelectedFile()" *ngIf="showLblLnk">Remove Label Image</a>
+              </div>
+              <!--Label Image Div Ends-->
+
+	      <!--Title English Starts-->
+              <div class='form-group'>
+                <label>Sort Order</label>
+                <input type='text' name='sortOrder' class='form-control' formControlName='sortOrder' placeholder='Sort-Order' [(ngModel)]="productsData.sortOrder">
+            </div>
+            <!--Title English Ends-->
+
+              <div class='form-group'>
+                  <button type="submit" class="btn btn-success" title="Save" [disabled]="!form.valid">Save</button> &nbsp; &nbsp;
+                  <button nbButton status="danger" (click)="onCloseModel()">Cancel</button>
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>

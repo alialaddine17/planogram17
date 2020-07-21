@@ -1,0 +1,71 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="primary" size="large" nbSpinnerMessage="Loading..Please Wait">
+  <nb-card-header>
+      Manage VIP Details
+  </nb-card-header>
+  <nb-card-body>
+
+      <div class="row">
+            <div class="col-xs-6 col-sm-3 marginClass"><div class='dropdown ml-3'>
+                <select class='form-control' name='type' (change)="selectionChangedForVipCategory($event)" [(ngModel)]="vipId">
+                    <option value=''>Select Vip Category</option>
+                    <option *ngFor='let vipcategory of vipCategoryData' [value]='vipcategory.id'>{{vipcategory.title_en}}</option>
+                </select>
+            </div>
+          </div>
+    
+          <div class="col-xs-4 marginClass">
+              <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button>
+          </div>
+          <div class="col-xs-4 ml-3 marginClass">
+              <button type="button" class="btn btn-danger" (click)="resetFilter()">Reset</button>
+        </div>
+          <nb-card-body class="select-group text-right">
+              <button type="submit" class="btn btn-primary" action="addd" title="Add VIP Details" name='addrecord' (click)="addVipDetails()">Add VIP Details</button>
+          </nb-card-body>
+      </div>
+
+      <div class="panel-table table-responsive">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <thead>
+                  <tr>
+                      <th style='display:none'>ID</th>
+                      <th>Sub Title English</th>
+                      <th>Sub Title Urdu</th>
+                      <th>Detail Title English</th>
+                      <th>Detail Title Urdu</th>
+                      <th>Vip Image</th>
+                      <th>Created At</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody *ngIf="objectLength == true">
+                  <tr *ngFor="let item of vipDetails">
+                      <ng-container *ngIf="item.id != null">
+                      <td style='display:none'>{{ item.id }}</td>
+                      <td>{{ item.subTitle_en }}</td>
+                      <td>{{ item.subTitle_ur }}</td>
+                      <td>{{ item.detailTitle_en }}</td>
+                      <td>{{ item.detailTitle_ur }}</td>
+                      <td><img [src]="item.vipImg" *ngIf="item.vipImg != null" width="50"></td>
+                      <td>{{ item.createdAt | date: 'MMM d, y, h:mm:ss a' }}</td>
+                      <td>
+                          <a title="Change Status" class="statusButton" (click)="updateVipDetailsStatus(1,item.id)"><i class="fa fa-toggle-on fa-2x fa-rotate-180 statusInactive" *ngIf="item.status == 0"></i></a>
+
+                          <a title="Change Status" class="statusButton" (click)="updateVipDetailsStatus(0,item.id)"><i class="fa fa-toggle-on fa-2x statusActive" *ngIf="item.status == 1"></i></a>
+                      </td>
+                      <td>
+                          <a title="Edit" class="editor_edit" (click)="editVipDetails(item)"><i class="fa fa-edit editIcon"></i></a>
+                          <a title="Delete" class="editor_remove" (click)="deleteVipDetails(item.id)"><i class="fa fa-trash editIcon"></i></a></td></ng-container>
+                  </tr>
+              </tbody>
+              <tbody *ngIf="objectLength == false">
+                <tr>
+                    <td colspan="3" class="no-data-available">No data!</td>
+                </tr>
+            <tbody>
+
+          </table>
+      </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,116 @@
+<div class="modal-header">
+  <nb-card-header>Add Product</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+      <div class="col-lg-12">
+          <form (ngSubmit)="onAddProduct()" [formGroup]="addProductForm" #form="ngForm">
+
+                  <nb-tabset>
+                    <nb-tab tabTitle="English">
+                      <!--Title English Starts-->
+                  <div class='form-group'>
+                    <label>Title English<span class="error">*</span></label>
+                    <input type='text' name='title_en' class='form-control' formControlName='title_en' placeholder='Title'>
+                    <p *ngIf='title_en.invalid && title_en.touched' class="error">English title is required.</p>
+                </div>
+                <!--Title English Ends-->
+
+                 <!--Description English Starts-->
+                 <div class="form-group">
+                  <label>Description English</label>
+                  <input type='text' name='productDesc_en' class='form-control' formControlName='productDesc_en' placeholder='Description English'>
+              </div>
+              <!--Description English Ends-->
+
+                    </nb-tab>
+                    <nb-tab tabTitle="Urdu">
+                      <!--Title Urdu Starts-->
+                  <div class='form-group'>
+                    <label>Title Urdu<span class="error">*</span></label>
+                    <input type='text' name='title_ur' class='form-control' formControlName='title_ur' placeholder='Title'>
+                    <p *ngIf='title_ur.invalid && title_ur.touched' class="error">Urdu title is required.</p>
+                </div>
+                <!--Title Urdu Ends-->
+
+                 <!--Description Urdu Starts-->
+                 <div class="form-group">
+                  <label>Description Urdu</label>
+                  <input type='text' name='productDesc_ur' class='form-control' formControlName='productDesc_ur' placeholder='Description Urdu'>
+                </div>
+                <!--Description Urdu Ends-->
+                    </nb-tab>
+                  </nb-tabset>
+
+                  <!--Main Category Div Start-->
+                  <div class='form-group'>
+                    <label>Parent Category<span class="error">*</span></label>
+                    <select class='form-control' name='catId' formControlName='catId' (change)="selectionChangedForMainCategory($event)">
+                      <option value=''>Select Parent Category</option>
+                      <option *ngFor='let parentId of parentIds' [value]='parentId.id'>{{parentId.title_en}}</option>
+                  </select>
+                  <div>
+                    <p *ngIf='catId.invalid && catId.touched' class="error">Parent Category is required.</p>
+                  </div>
+                </div>
+                <!--Main Category Div End-->
+
+                <!--Sub Category Div Starts-->
+                <div class="form-group" *ngIf="showHideSubCategory">
+                  <label>Sub Category<span class="error">*</span></label>
+                  <select class="form-control" (change)="selectionChangedForSubCategory($event)" formControlName="subCatId">
+                  <option value="">Please select Sub Category</option>
+                  <option *ngFor="let subcat of subCategory" [value]="subcat.id">{{subcat.title_en}}</option>
+                  </select>
+                  <div>
+                    <p *ngIf='subCatId.invalid && subCatId.touched' class="error">Sub Category is required.</p>
+                  </div>
+                </div>
+              <!--Sub Category Div Ends-->
+
+                <!--Product Image Div Starts-->
+                <div class='form-group'>
+                  <label>Product Image<span class="error">*</span></label>
+                  <input type='file' name='productImg' class='form-control' placeholder='Upload File' (change)="uploadFileForProductImage($event)">
+                </div>
+                <!--Product Image Div Ends-->
+
+                <!--TrafficImage Type Dropdown Start-->
+                <div class='form-group'>
+                  <label>Traffic Flow Type</label>
+                  <select class='form-control' name='trafficFlow' formControlName='trafficFlow' (change)="onChange($event)">
+                      <option value='null'>Select Type</option>
+                      <option *ngFor='let mytype of types' [value]='mytype.type'>{{mytype.name}}</option>
+                  </select>
+                  
+              </div>
+              <!--TrafficImage Type DropDown End-->
+
+               <!--Label Image Div Starts-->
+               <div class='form-group'>
+                <label>Label Image</label>
+                <input #lblImg type='file' name='label' class='form-control' placeholder='Upload File' (change)="uploadFileForLabelImage($event)">
+                <a style="margin-top:10px;" href="javascript:void(0)" (click)="removeSelectedFile()" *ngIf="showLblLnk">Remove Label Image</a>
+              </div>
+              <!--Label Image Div Ends-->
+
+	      <!--Sub Category Div Starts-->
+                <div class="form-group">
+                  <label>Sort Order</label>
+                    <input type='text' name='sortOrder' class='form-control' formControlName='sortOrder' placeholder='Sort-Order'>
+                </div>
+              <!--Sub Category Div Ends-->
+
+              <div class='form-group'>
+                  <button type="submit" class="btn btn-success" title="Save" [disabled]="!form.valid">Save</button> &nbsp; &nbsp;
+                  <button nbButton status="danger" (click)="onCloseModel()">Cancel</button>
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <nb-card-header>Edit Sub-Category</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form *ngIf="subcategoriesData !=''" (ngSubmit)="onUpdateSubCateory(subcategoryEditForm.value)" [formGroup]="subcategoryEditForm" #form="ngForm">
+      <input type="hidden" class="form-control" [(ngModel)]="subcategoriesData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+
+
+      <nb-tabset>
+          <nb-tab tabTitle="English">
+              <!--English Title Div Starts-->
+              <div class='form-group'>
+                  <label>Title<span class='error'>*</span></label>
+                  <input type='text' name='title_en' class='form-control' formControlName='title_en' placeholder='Title' required [(ngModel)]="subcategoriesData.title_en">
+                  <div *ngIf='subcategoryEditForm.controls["title_en"].invalid && (subcategoryEditForm.controls["title_en"].dirty || subcategoryEditForm.controls["title_en"].touched)'>
+                      <div *ngIf='subcategoryEditForm.controls["title_en"].errors.required' class="error">English title is required.</div>
+                  </div>
+              </div>
+              <!--English Title Div Ends-->
+
+	      <!--English Sub Title Div Starts-->
+              <div class='form-group'>
+                  <label>Sub-Title</label>
+                  <input type='text' name='subTitle_en' class='form-control' formControlName='subTitle_en' placeholder='Sub-Title' [(ngModel)]="subcategoriesData.subTitle_en">
+              </div>
+              <!--English Sub Title Div Ends-->
+          </nb-tab>
+          <nb-tab tabTitle="Urdu">
+              <!--Urdu Title Div Starts-->
+              <div class='form-group'>
+                  <label>Title<span class='error'>*</span></label>
+                  <input type='text' name='title_ur' class='form-control' formControlName='title_ur' placeholder='Title' required [(ngModel)]="subcategoriesData.title_ur">
+                  <div *ngIf='subcategoryEditForm.controls["title_ur"].invalid && (subcategoryEditForm.controls["title_ur"].dirty || subcategoryEditForm.controls["title_ur"].touched)'>
+                      <div *ngIf='subcategoryEditForm.controls["title_ur"].errors.required' class="error">Urdu title is required.</div>
+                  </div>
+              </div>
+              <!--Urdu Title Div Ends-->
+	      
+		<!--Urdu Title Div Starts-->
+	      <div class='form-group'>
+		  <label>Sub-Title</label>
+		  <input type='text' name='subTitle_ur' class='form-control' formControlName='subTitle_ur' placeholder='Sub-Title' [(ngModel)]="subcategoriesData.subTitle_ur">
+		  
+	      </div>
+	      <!--Urdu Title Div Ends-->
+          </nb-tab>
+      </nb-tabset>
+
+      <!--Parent Category Div Starts-->
+      <div class="form-group">
+        <p>Parent Category<span class="error">*</span></p>
+        <select name='parentid' class="form-control" formControlName='parentid' [(ngModel)]="subcategoriesData.parentid">
+            <option value=''>Please select Parent Category</option>
+            <option *ngFor="let parentId of parentIds" [value]="parentId.id">{{parentId.title_en}}</option>
+        </select>
+        <div *ngIf="subcategoryEditForm.controls['parentid'].invalid && (subcategoryEditForm.controls['parentid'].dirty || subcategoryEditForm.controls['parentid'].touched)">
+            <div *ngIf="subcategoryEditForm.controls['parentid'].errors.required" class="error">
+                Parent Category is required.
+            </div>
+        </div>
+    </div>
+    <!--Parent Category Div Ends-->
+
+    <!--Sort Order Div Starts-->
+    <div class='form-group'>
+        <label>Sort Order</label>
+        <input type='text' name='catSortOrder' class='form-control' formControlName='catSortOrder' placeholder='Sort-Order' [(ngModel)]="subcategoriesData.catSortOrder">
+      </div>
+    <!--Sort Order Div Ends-->
+
+
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" title="Save" [disabled]="subcategoryEditForm.invalid">Save</button> &nbsp; &nbsp;
+          <button type="button" class="btn btn-danger" (click)="onCloseModel()">Cancel</button>
+      </div>
+  </form>
+
+</div>

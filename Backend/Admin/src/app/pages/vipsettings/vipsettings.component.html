@@ -1,0 +1,51 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="primary" size="large" nbSpinnerMessage="Loading..Please Wait">
+  <nb-card-header>
+      Manage VIP Settings
+  </nb-card-header>
+  <nb-card-body>
+
+      <div class="row">
+          <nb-card-body class="select-group text-right">
+              <button type="submit" class="btn btn-primary" action="addd" title="Add VIP Setting" name='addrecord' (click)="addVipCategory()">Add VIP Setting</button>
+          </nb-card-body>
+      </div>
+
+      <div class="panel-table table-responsive">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <thead>
+                  <tr>
+                      <th style='display:none'>ID</th>
+                      <th>Description English</th>
+                      <th>Description Urdu</th>
+                      <th>Vip Image</th>
+                      <th>Created At</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody *ngIf="objectLength == true">
+                  <tr *ngFor="let item of vipSetting">
+                      <td style='display:none'>{{ item.id }}</td>
+                      <td>{{ item.description_en }}</td>
+                      <td>{{ item.description_ur }}</td>
+                      <td><img [src]="item.vipImg" *ngIf="item.vipImg != '-'" width="50"></td>
+                      <td>{{ item.created_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+                      <td>
+                          <a title="Change Status" class="statusButton" (click)="updateVipCategoryStatus(1,item.id)"><i class="fa fa-toggle-on fa-2x fa-rotate-180 statusInactive" *ngIf="item.status == 0"></i></a>
+
+                          <a title="Change Status" class="statusButton" (click)="updateVipCategoryStatus(0,item.id)"><i class="fa fa-toggle-on fa-2x statusActive" *ngIf="item.status == 1"></i></a>
+                      </td>
+                      <td>
+                          <a title="Edit" class="editor_edit" (click)="editVipCategory(item)"><i class="fa fa-edit editIcon"></i></a>
+                  </tr>
+              </tbody>
+              <tbody *ngIf="objectLength == false">
+                <tr>
+                    <td colspan="3" class="no-data-available">No data!</td>
+                </tr>
+            <tbody>
+
+          </table>
+      </div>
+  </nb-card-body>
+</nb-card>

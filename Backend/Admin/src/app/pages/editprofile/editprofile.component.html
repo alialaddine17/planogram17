@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <nb-card-header>Edit Profile</nb-card-header>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <form *ngIf="userProfileData !=''" (ngSubmit)="onUpdateUserProfile(userProfileEditForm.value)" [formGroup]="userProfileEditForm" #form="ngForm">
+                <input type="hidden" class="form-control" [(ngModel)]="userProfileData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+
+                <!--First Name Div Starts-->
+                <div class='form-group'>
+                    <label>First Name<span class="error">*</span></label>
+                    <input type='text' name='first_name' class='form-control' formControlName='first_name' placeholder='First Name' [(ngModel)]="userProfileData.first_name" required>
+                    <div *ngIf='userProfileEditForm.controls["first_name"].invalid && (userProfileEditForm.controls["first_name"].dirty || userProfileEditForm.controls["first_name"].touched)'>
+                        <div *ngIf='userProfileEditForm.controls["first_name"].errors.required' class="error">First Name is required.</div>
+                    </div>
+                </div>
+                <!--First Name Div Ends-->
+
+
+                <!--Last Name Div Starts-->
+                <div class='form-group'>
+                    <label>Last Name<span class="error">*</span></label>
+                    <input type='text' name='last_name' class='form-control' formControlName='last_name' placeholder='Last Name' [(ngModel)]="userProfileData.last_name" required>
+                    <div *ngIf='userProfileEditForm.controls["last_name"].invalid && (userProfileEditForm.controls["last_name"].dirty || userProfileEditForm.controls["last_name"].touched)'>
+                        <div *ngIf='userProfileEditForm.controls["last_name"].errors.required' class="error">Last Name is required.</div>
+                    </div>
+                </div>
+                <!--Last Name Div Ends-->
+
+
+                <!--Contact Number Div Starts-->
+                <div class='form-group'>
+                    <label>Contact Number<span class="error">*</span></label>
+                    <input type='text' name='contact_number' class='form-control' formControlName='contact_number' placeholder='Contact Number' [(ngModel)]="userProfileData.contact_number" required>
+                    <div *ngIf='userProfileEditForm.controls["contact_number"].invalid && (userProfileEditForm.controls["contact_number"].dirty || userProfileEditForm.controls["contact_number"].touched)'>
+                        <div *ngIf='userProfileEditForm.controls["contact_number"].errors.required' class="error">Contact Number is required.</div>
+                    </div>
+                </div>
+                <!--Contact Number Div Ends-->
+
+                <button type="submit" class="btn btn-success" title="Save" [disabled]="userProfileEditForm.invalid">Save</button> &nbsp; &nbsp;
+                <button class="btn btn-danger" title="Save" (click)="onCancelClick()">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>

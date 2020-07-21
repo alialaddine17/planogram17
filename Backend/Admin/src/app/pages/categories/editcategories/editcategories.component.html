@@ -1,0 +1,61 @@
+<div class="modal-header">
+  <nb-card-header>Edit Category</nb-card-header>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCloseModel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+  <form *ngIf="categoriesData !=''" (ngSubmit)="onUpdateCateory(categoryEditForm.value)" [formGroup]="categoryEditForm" #form="ngForm">
+      <input type="hidden" class="form-control" [(ngModel)]="categoriesData.id" name="id" [ngModelOptions]="{standalone: true}" required>
+
+      <nb-tabset>
+          <nb-tab tabTitle="English">
+              <!--English Title Div Starts-->
+              <div class='form-group'>
+                  <label>Title<span class='error'>*</span></label>
+                  <input type='text' name='title_en' class='form-control' formControlName='title_en' placeholder='Title' required [(ngModel)]="categoriesData.title_en">
+                  <div *ngIf='categoryEditForm.controls["title_en"].invalid && (categoryEditForm.controls["title_en"].dirty || categoryEditForm.controls["title_en"].touched)'>
+                      <div *ngIf='categoryEditForm.controls["title_en"].errors.required' class="error">English title is required.
+                      </div>
+                  </div>
+              </div>
+              <!--English Title Div Ends-->
+          </nb-tab>
+
+
+          <nb-tab tabTitle="Urdu">
+              <!--Urdu Title Div Starts-->
+              <div class='form-group'>
+                  <label>Title<span class='error'>*</span></label>
+                  <input type='text' name='title_ur' class='form-control' formControlName='title_ur' placeholder='Title' required [(ngModel)]="categoriesData.title_ur">
+                  <div *ngIf='categoryEditForm.controls["title_ur"].invalid && (categoryEditForm.controls["title_ur"].dirty || categoryEditForm.controls["title_ur"].touched)'>
+                      <div *ngIf='categoryEditForm.controls["title_ur"].errors.required' class="error">Urdu title is required.</div>
+                  </div>
+              </div>
+              <!--Urdu Title Div Ends-->
+          </nb-tab>
+      </nb-tabset>
+
+      <!--Label Image Div Starts-->
+      <div class='form-group'>
+        <label>Category Image</label>
+        <input type='file' name='catImg' class='form-control' placeholder='Upload File' (change)="uploadFileForCatImage($event)">
+        <img [src]="categoriesData.catImg" width="150" *ngIf="categoriesData.catImg != '-'">
+      </div>
+      <!--Label Image Div Ends-->
+
+      <!--Sort Order Div Starts-->
+      <div class='form-group'>
+        <label>Sort Order</label>
+        <input type='text' name='catSortOrder' class='form-control' formControlName='catSortOrder' placeholder='Sort-Order' [(ngModel)]="categoriesData.catSortOrder">
+      </div>
+    <!--Sort Order Div Ends-->
+
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" title="Save" [disabled]="categoryEditForm.invalid">Save</button> &nbsp; &nbsp;
+          <button type="button" class="btn btn-danger" (click)="onCloseModel()">Cancel</button>
+      </div>
+  </form>
+
+</div>
