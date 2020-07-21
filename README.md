@@ -1,4 +1,4 @@
-==================================
+
 Install/Setup Backend (Laravel)
 ===================================
 
@@ -8,7 +8,7 @@ Step 3 : If you do not have composer install then install it and then perform "c
 Step 4 : In root there is .env file in which database credentails needs to be updated
 Step 5 : Replace constants like DB_DATABASE, DB_USERNAME, DB_PASSWORD with your respective credentials
 
-==================================
+
 Install/Setup Backend (Angular 8)
 ===================================
 
@@ -19,7 +19,7 @@ Step 4 : Now go to planogram17/Backend/Admin/src/environments which hase two fil
 Step 5 : To generate local build (ng build) set base url in environment.ts
 Step 5 : To generate production build (ng build --prod --aot) set base url in environment.prod.ts
 	
-===========
+
 Example
 ===========
 baseUrl : 'http://abc.com/api/'
@@ -27,7 +27,7 @@ baseUrl : 'http://abc.com/api/'
 In above example 'http://abc.com/' is the base url whose virtual host for laravel is set. Add 'api' statically after it
 
 
-=========================================
+
 Steps to Run Admin Panel
 ==========================================
 
@@ -38,7 +38,7 @@ Step 4 : Rename folder "dist" to "admin"
 Step 5 : In admin folder there is index.html file in which base url of Laravel must be replaced
 
 
-===========
+
 Example
 ===========
 <base href="http://abc.com/admin/">
