@@ -43,10 +43,10 @@ Example
 
 Step 6 : Create an .htaccess file in admin folder with below code </br>
 
-DirectoryIndex index.html
-RewriteEngine On
-RewriteBase /admin/
-Options +FollowSymLinks
+DirectoryIndex index.html </br>
+RewriteEngine On </br>
+RewriteBase /admin/ </br>
+Options +FollowSymLinks </br>
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.html [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f </br>
+RewriteRule ^(.*)$ index.html [L,QSA] </br>
