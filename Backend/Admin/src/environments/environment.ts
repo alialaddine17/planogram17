@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  baseUrl : 'http://redbull-pwa.php1.projectbeta.biz/api/',
+  baseUrl : 'http://wingmanapi.rbprojects.me/api/',
 };
 

@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: true,
-  baseUrl : 'http://redbull-pwa.php1.projectbeta.biz/api/'
+  baseUrl : 'http://wingmanapi.rbprojects.me/api/'
 };
