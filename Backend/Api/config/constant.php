@@ -16,15 +16,16 @@ if($isLocal == 1)
 else
 {
     return [
-        'CATEGORIES_IMG'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/categories/',
-        'PRODUCTIMG_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/product/',
-        'LABEL_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/label/',
-        'VIPIMG_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/vip/',
-        'ANNOUNCEMENTIMG_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/anouncement/',
-        'ANNOUNCEMENTPDF_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/anouncementPdf/',
-        'VIP_SETTING_PATH'=>'http://redbull-pwa.php1.projectbeta.biz/uploads/vip_setting/',
+        'CATEGORIES_IMG'=>'http://wingmanapi.rbprojects.me/public/uploads/categories/',
+        'PRODUCTIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/product/',
+        'LABEL_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/label/',
+        'VIPIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/vip/',
+        'ANNOUNCEMENTIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/anouncement/',
+        'ANNOUNCEMENTPDF_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/anouncementPdf/',
+        'VIP_SETTING_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/vip_setting/',
     ];
 }
+
 
 
 
