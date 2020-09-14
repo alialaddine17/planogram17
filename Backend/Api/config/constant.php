@@ -16,13 +16,13 @@ if($isLocal == 1)
 else
 {
     return [
-        'CATEGORIES_IMG'=>'http://wingmanapi.rbprojects.me/public/uploads/categories/',
-        'PRODUCTIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/product/',
-        'LABEL_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/label/',
-        'VIPIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/vip/',
-        'ANNOUNCEMENTIMG_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/anouncement/',
-        'ANNOUNCEMENTPDF_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/anouncementPdf/',
-        'VIP_SETTING_PATH'=>'http://wingmanapi.rbprojects.me/public/uploads/vip_setting/',
+        'CATEGORIES_IMG'=>'https://wingmanapi.rbprojects.me/public/uploads/categories/',
+        'PRODUCTIMG_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/product/',
+        'LABEL_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/label/',
+        'VIPIMG_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/vip/',
+        'ANNOUNCEMENTIMG_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/anouncement/',
+        'ANNOUNCEMENTPDF_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/anouncementPdf/',
+        'VIP_SETTING_PATH'=>'https://wingmanapi.rbprojects.me/public/uploads/vip_setting/',
     ];
 }
 
